@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AutoType — your passage, at your pace</title>
+  <link rel="stylesheet" href="popup.css">
+  <script type="module" src="popup.js"></script>
+</head>
+<body>
+  <main>
+    <header class="masthead">
+      <div class="identity"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 7h20M16 7v18M11 25h10M6 12V7m20 5V7"/></svg><h1>AutoType</h1></div>
+      <span class="pace">75 <span>WPM</span></span>
+    </header>
+
+    <div class="draft-heading"><label for="draft">Passage to type</label><span id="save-status" role="status">Loading…</span></div>
+    <textarea id="draft" rows="6" maxlength="200000" spellcheck="false" placeholder="Paste your passage here.&#10;&#10;Then click your destination and use the shortcut below." disabled></textarea>
+    <div class="draft-details"><span id="character-count">0 characters</span><span id="duration">About 0 seconds</span></div>
+    <p id="save-error" class="error" role="alert" hidden></p>
+
+    <section class="session" aria-labelledby="session-title">
+      <div class="session-heading"><h2 id="session-title">Ready when you are</h2><button id="stop" class="stop" disabled>Stop</button></div>
+      <progress id="progress" value="0" max="1" aria-label="Passage progress"></progress>
+      <div class="progress-details"><span id="progress-label">No active passage</span><span id="remaining"></span></div>
+      <p id="session-message" role="status">Click a text field, then use the shortcut to start.</p>
+    </section>
+
+    <section class="instructions" aria-label="Keyboard controls">
+      <div class="shortcut-row"><span>Start · pause · resume</span><kbd id="toggle-shortcut">Checking…</kbd></div>
+      <div class="shortcut-row"><span>Stop &amp; reset</span><kbd id="stop-shortcut">Checking…</kbd></div>
+      <button id="shortcuts" class="text-button">Change shortcuts <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7"/></svg></button>
+      <p class="hint">Click your editor. Press the start shortcut.</p>
+    </section>
+
+    <footer><span class="local"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1"/><path d="M5 7V5a3 3 0 0 1 6 0v2"/></svg> Draft stays on this device</span><button id="clear" class="text-button" disabled>Clear passage</button></footer>
+    <details><summary>Before your first run</summary><p>Close the popup before starting. Opening it again pauses typing. Chrome shows a debugging banner while typing. AutoType uses that access to send keyboard input to your chosen editor.</p><p>Your passage stays on this device until cleared. Text you type is received by the destination website. No account, analytics, or cloud sync.</p><p>Google Docs is a compatibility target. Check the release notes for verified support. Website formatting settings can change the entered text.</p></details>
+  </main>
+</body>
+</html>

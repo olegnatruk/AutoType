@@ -1,0 +1,321 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-05T07:59:42.257Z",
+  "title": "Design System: AutoType",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "tonalRamp": [
+          "oklch(15% 0.00951 93.57)",
+          "oklch(26.4% 0.00951 93.57)",
+          "oklch(37.9% 0.00951 93.57)",
+          "oklch(49.3% 0.00951 93.57)",
+          "oklch(60.7% 0.00951 93.57)",
+          "oklch(72.1% 0.00951 93.57)",
+          "oklch(83.6% 0.00951 93.57)",
+          "oklch(95% 0.00951 93.57)"
+        ]
+      },
+      "ink": {
+        "role": "primary",
+        "displayName": "Reading ink",
+        "tonalRamp": [
+          "oklch(15% 0.02746 161.22)",
+          "oklch(26.4% 0.02746 161.22)",
+          "oklch(37.9% 0.02746 161.22)",
+          "oklch(49.3% 0.02746 161.22)",
+          "oklch(60.7% 0.02746 161.22)",
+          "oklch(72.1% 0.02746 161.22)",
+          "oklch(83.6% 0.02746 161.22)",
+          "oklch(95% 0.02746 161.22)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted ink",
+        "tonalRamp": [
+          "oklch(15% 0.02189 137.84)",
+          "oklch(26.4% 0.02189 137.84)",
+          "oklch(37.9% 0.02189 137.84)",
+          "oklch(49.3% 0.02189 137.84)",
+          "oklch(60.7% 0.02189 137.84)",
+          "oklch(72.1% 0.02189 137.84)",
+          "oklch(83.6% 0.02189 137.84)",
+          "oklch(95% 0.02189 137.84)"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Rule",
+        "tonalRamp": [
+          "oklch(15% 0.01840 124.01)",
+          "oklch(26.4% 0.01840 124.01)",
+          "oklch(37.9% 0.01840 124.01)",
+          "oklch(49.3% 0.01840 124.01)",
+          "oklch(60.7% 0.01840 124.01)",
+          "oklch(72.1% 0.01840 124.01)",
+          "oklch(83.6% 0.01840 124.01)",
+          "oklch(95% 0.01840 124.01)"
+        ]
+      },
+      "green": {
+        "role": "primary",
+        "displayName": "Green ink",
+        "tonalRamp": [
+          "oklch(15% 0.03695 166.28)",
+          "oklch(26.4% 0.03695 166.28)",
+          "oklch(37.9% 0.03695 166.28)",
+          "oklch(49.3% 0.03695 166.28)",
+          "oklch(60.7% 0.03695 166.28)",
+          "oklch(72.1% 0.03695 166.28)",
+          "oklch(83.6% 0.03695 166.28)",
+          "oklch(95% 0.03695 166.28)"
+        ]
+      },
+      "danger": {
+        "role": "secondary",
+        "displayName": "Warning red",
+        "tonalRamp": [
+          "oklch(15% 0.13703 31.96)",
+          "oklch(26.4% 0.13703 31.96)",
+          "oklch(37.9% 0.13703 31.96)",
+          "oklch(49.3% 0.13703 31.96)",
+          "oklch(60.7% 0.13703 31.96)",
+          "oklch(72.1% 0.13703 31.96)",
+          "oklch(83.6% 0.13703 31.96)",
+          "oklch(95% 0.13703 31.96)"
+        ]
+      },
+      "field": {
+        "role": "neutral",
+        "displayName": "Field paper",
+        "tonalRamp": [
+          "oklch(15% 0.00537 95.10)",
+          "oklch(26.4% 0.00537 95.10)",
+          "oklch(37.9% 0.00537 95.10)",
+          "oklch(49.3% 0.00537 95.10)",
+          "oklch(60.7% 0.00537 95.10)",
+          "oklch(72.1% 0.00537 95.10)",
+          "oklch(83.6% 0.00537 95.10)",
+          "oklch(95% 0.00537 95.10)"
+        ]
+      },
+      "field-border": {
+        "role": "neutral",
+        "displayName": "Field boundary",
+        "tonalRamp": [
+          "oklch(15% 0.02381 134.98)",
+          "oklch(26.4% 0.02381 134.98)",
+          "oklch(37.9% 0.02381 134.98)",
+          "oklch(49.3% 0.02381 134.98)",
+          "oklch(60.7% 0.02381 134.98)",
+          "oklch(72.1% 0.02381 134.98)",
+          "oklch(83.6% 0.02381 134.98)",
+          "oklch(95% 0.02381 134.98)"
+        ]
+      },
+      "placeholder": {
+        "role": "neutral",
+        "displayName": "Placeholder ink",
+        "tonalRamp": [
+          "oklch(15% 0.01906 125.52)",
+          "oklch(26.4% 0.01906 125.52)",
+          "oklch(37.9% 0.01906 125.52)",
+          "oklch(49.3% 0.01906 125.52)",
+          "oklch(60.7% 0.01906 125.52)",
+          "oklch(72.1% 0.01906 125.52)",
+          "oklch(83.6% 0.01906 125.52)",
+          "oklch(95% 0.01906 125.52)"
+        ]
+      },
+      "inactive": {
+        "role": "neutral",
+        "displayName": "Inactive paper",
+        "tonalRamp": [
+          "oklch(15% 0.01067 112.37)",
+          "oklch(26.4% 0.01067 112.37)",
+          "oklch(37.9% 0.01067 112.37)",
+          "oklch(49.3% 0.01067 112.37)",
+          "oklch(60.7% 0.01067 112.37)",
+          "oklch(72.1% 0.01067 112.37)",
+          "oklch(83.6% 0.01067 112.37)",
+          "oklch(95% 0.01067 112.37)"
+        ]
+      },
+      "selection": {
+        "role": "neutral",
+        "displayName": "Selection wash",
+        "tonalRamp": [
+          "oklch(15% 0.03246 140.99)",
+          "oklch(26.4% 0.03246 140.99)",
+          "oklch(37.9% 0.03246 140.99)",
+          "oklch(49.3% 0.03246 140.99)",
+          "oklch(60.7% 0.03246 140.99)",
+          "oklch(72.1% 0.03246 140.99)",
+          "oklch(83.6% 0.03246 140.99)",
+          "oklch(95% 0.03246 140.99)"
+        ]
+      },
+      "danger-hover": {
+        "role": "secondary",
+        "displayName": "Warning wash",
+        "tonalRamp": [
+          "oklch(15% 0.02096 43.85)",
+          "oklch(26.4% 0.02096 43.85)",
+          "oklch(37.9% 0.02096 43.85)",
+          "oklch(49.3% 0.02096 43.85)",
+          "oklch(60.7% 0.02096 43.85)",
+          "oklch(72.1% 0.02096 43.85)",
+          "oklch(83.6% 0.02096 43.85)",
+          "oklch(95% 0.02096 43.85)"
+        ]
+      },
+      "progress-track": {
+        "role": "neutral",
+        "displayName": "Progress track",
+        "tonalRamp": [
+          "oklch(15% 0.01533 123.06)",
+          "oklch(26.4% 0.01533 123.06)",
+          "oklch(37.9% 0.01533 123.06)",
+          "oklch(49.3% 0.01533 123.06)",
+          "oklch(60.7% 0.01533 123.06)",
+          "oklch(72.1% 0.01533 123.06)",
+          "oklch(83.6% 0.01533 123.06)",
+          "oklch(95% 0.01533 123.06)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "title": {
+        "displayName": "Title",
+        "purpose": "Product name."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Base utility text and shortcut descriptions."
+      },
+      "passage": {
+        "displayName": "Passage",
+        "purpose": "Editable prepared text."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Passage field label."
+      },
+      "section-title": {
+        "displayName": "Section title",
+        "purpose": "Session phase heading."
+      },
+      "pace": {
+        "displayName": "Pace",
+        "purpose": "Numeric pace readout; tabular numerals."
+      },
+      "metadata": {
+        "displayName": "Metadata",
+        "purpose": "Save feedback, counts, keycaps, and text actions."
+      },
+      "status": {
+        "displayName": "Status",
+        "purpose": "Session status message."
+      }
+    },
+    "shadows": [],
+    "motion": [],
+    "breakpoints": []
+  },
+  "components": [
+    {
+      "name": "Stop button",
+      "kind": "button",
+      "refersTo": "stop-button",
+      "description": "Outlined Stop action with enabled, hover, focus, and disabled states.",
+      "html": "<button class=\"ds-stop\">Stop</button> <button class=\"ds-stop\" disabled>Stop</button>",
+      "css": ".ds-stop{font:600 11px -apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;border:1px solid var(--rule,#d2d7ca);padding:5px 11px;background:transparent;border-radius:5px;color:var(--danger,#9c3827);cursor:pointer}.ds-stop:not(:disabled):hover{background:#f4e3dc;border-color:var(--danger,#9c3827)}.ds-stop:disabled{color:var(--muted,#596256);opacity:.65;cursor:default}.ds-stop:focus-visible{outline:2px solid var(--green,#324c41);outline-offset:4px}"
+    },
+    {
+      "name": "Text action",
+      "kind": "button",
+      "refersTo": "text-button",
+      "description": "Quiet green actions for shortcut settings and clearing a draft.",
+      "html": "<button class=\"ds-text\">Change shortcuts <svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><path d=\"M4 12 12 4M5 4h7v7\"/></svg></button>",
+      "css": ".ds-text{font:11px -apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;padding:0;border:0;background:transparent;color:var(--green,#324c41);cursor:pointer;text-decoration-thickness:1px;text-underline-offset:3px}.ds-text:hover{text-decoration:underline}.ds-text:disabled{color:var(--muted,#596256);cursor:default}.ds-text svg{width:12px;height:12px;margin-left:3px;vertical-align:middle;fill:none;stroke:currentColor;stroke-width:1.5}.ds-text:focus-visible{outline:2px solid var(--green,#324c41);outline-offset:4px}"
+    },
+    {
+      "name": "Passage field",
+      "kind": "input",
+      "refersTo": "passage-field",
+      "description": "Native vertically resizable passage editor with green focus and caret.",
+      "html": "<textarea class=\"ds-passage\" rows=\"6\" maxlength=\"200000\" spellcheck=\"false\" aria-label=\"Passage to type\" placeholder=\"Paste your passage here.\">Some words deserve a little room.</textarea>",
+      "css": ".ds-passage{display:block;resize:vertical;min-height:154px;max-height:250px;width:100%;font:13px -apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;border:1px solid #aab4a5;background:#fffefa;color:var(--ink,#26372e);border-radius:8px;padding:13px;line-height:1.65;caret-color:var(--green,#324c41);scrollbar-color:#aab4a5 #fffefa;scrollbar-width:thin}.ds-passage::placeholder{color:#72776b}.ds-passage:focus{outline:2px solid var(--green,#324c41);outline-offset:2px}.ds-passage:disabled{background:#eeefe7}"
+    },
+    {
+      "name": "Shortcut keycap",
+      "kind": "custom",
+      "refersTo": "shortcut-keycap",
+      "description": "Nonwrapping display of the actual Chrome keyboard assignment.",
+      "html": "<kbd class=\"ds-keycap\">⇧⌘Y</kbd>",
+      "css": ".ds-keycap{border:1px solid var(--rule,#d2d7ca);background:#eeefe7;border-radius:4px;padding:3px 7px;font:11px -apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;white-space:nowrap;color:var(--ink,#26372e)}"
+    },
+    {
+      "name": "Session strip",
+      "kind": "custom",
+      "refersTo": "session-strip",
+      "description": "Ruled session status with a recorded character offset and actionable message.",
+      "html": "<section class=\"ds-session\" aria-label=\"Typing session\"><div class=\"ds-heading\"><h2>Paused at your cursor</h2><button class=\"ds-session-stop\">Stop</button></div><progress class=\"ds-progress\" value=\"102\" max=\"1650\" aria-label=\"Passage progress\"></progress><div class=\"ds-counts\"><span>102 of 1,650 characters</span><span>4m 8s left</span></div><p class=\"ds-message\" role=\"status\">Tab changed. Return to the original editor to resume.</p></section>",
+      "css": ".ds-session{font:13px -apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;color:var(--ink,#26372e);border-top:1px solid var(--rule,#d2d7ca);border-bottom:1px solid var(--rule,#d2d7ca);margin-top:16px;padding:13px 0 12px}.ds-heading,.ds-counts{display:flex;align-items:center;justify-content:space-between;gap:10px}.ds-heading h2{font-size:13px;margin:0;font-weight:650}.ds-session-stop{font:600 11px -apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;border:1px solid var(--rule,#d2d7ca);padding:5px 11px;background:transparent;border-radius:5px;color:var(--danger,#9c3827);cursor:pointer}.ds-session-stop:not(:disabled):hover{background:#f4e3dc;border-color:var(--danger,#9c3827)}.ds-session-stop:disabled{color:var(--muted,#596256);opacity:.65;cursor:default}.ds-session-stop:focus-visible{outline:2px solid var(--green,#324c41);outline-offset:4px}.ds-progress{display:block;width:100%;height:4px;border:0;border-radius:0;margin-top:12px;appearance:none}.ds-progress::-webkit-progress-bar{background:#e0e4d9}.ds-progress::-webkit-progress-value{background:var(--green,#324c41)}.ds-progress::-moz-progress-bar{background:var(--green,#324c41)}.ds-counts{color:var(--muted,#596256);font-size:11px;font-variant-numeric:tabular-nums;margin-top:9px}.ds-message{font-size:12px;color:var(--muted,#596256);margin:10px 0 0;line-height:1.4}"
+    },
+    {
+      "name": "Progress rule",
+      "kind": "custom",
+      "refersTo": "progress-rule",
+      "description": "Square four-pixel native progress display; no visual interpolation.",
+      "html": "<progress class=\"ds-rule\" value=\"40\" max=\"100\" aria-label=\"Passage progress\"></progress>",
+      "css": ".ds-rule{display:block;width:100%;height:4px;border:0;border-radius:0;margin-top:12px;appearance:none}.ds-rule::-webkit-progress-bar{background:#e0e4d9}.ds-rule::-webkit-progress-value{background:var(--green,#324c41)}.ds-rule::-moz-progress-bar{background:var(--green,#324c41)}"
+    },
+    {
+      "name": "First-run disclosure",
+      "kind": "custom",
+      "description": "Native details control beneath the locality footer.",
+      "html": "<details class=\"ds-disclosure\"><summary>Before your first run</summary><p>Close the popup before starting. Opening it again pauses typing.</p><p>Your passage stays on this device until cleared. Text you type is received by the destination website.</p></details>",
+      "css": ".ds-disclosure{margin-top:8px;color:var(--muted,#596256);font:11px -apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;line-height:1.55}.ds-disclosure summary{cursor:pointer}.ds-disclosure p{margin:8px 0}.ds-disclosure summary:focus-visible{outline:2px solid var(--green,#324c41);outline-offset:4px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Quiet Writing Slip",
+    "overview": "The quiet writing slip gives a compact Chrome utility the clarity of paper and green ink. A pale ground, restrained rules, native system text, and a large passage field keep the prepared text central. The interface uses a single column and small, legible controls rather than a decorative application shell.\n\nThe built popup expresses that world through local save feedback, tabular counts, a thin progress rule, and visible keyboard controls. Color identifies focus, action, and errors; it does not carry session meaning alone. The approved direction lives in the surface brief; this document records the implemented visual vocabulary.",
+    "keyCharacteristics": [
+      "Pale paper, green ink, and restrained red feedback.",
+      "Native system typography with tabular numeric readouts.",
+      "Flat surfaces separated by thin rules.",
+      "A spacious passage field inside a compact utility."
+    ],
+    "rules": [
+      {
+        "name": "The Green Ink Rule",
+        "body": "Green marks focus, progress, and utility actions. Red is reserved for Stop and error feedback.",
+        "section": "colors"
+      },
+      {
+        "name": "The Flat Paper Rule",
+        "body": "Use paper tones, one-pixel rules, and focus outlines for separation; the built popup has no shadows.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep the pale paper ground and green focus/action treatment.",
+      "Do pair session color with explicit status text and acknowledged character counts.",
+      "Do use the native system font stack and tabular numerals for counts and pace.",
+      "Do retain visible keyboard focus and the textarea’s native vertical resize.",
+      "Do preserve the popup width cap and allow explanatory text to wrap.",
+      "Do describe draft locality precisely: the destination website receives typed text."
+    ],
+    "donts": [
+      "Don't add shadows, decorative imagery, or display typography to this established utility.",
+      "Don't use color alone to distinguish paused, stopped, complete, or error states.",
+      "Don't add a popup Start button that replaces the explicit destination keyboard command.",
+      "Don't claim a breakpoint, animation, reduced-motion override, or editor compatibility that the implementation does not provide."
+    ]
+  }
+}

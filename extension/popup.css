@@ -1,0 +1,63 @@
+:root {
+  color-scheme: light;
+  --paper: #f7f5ee;
+  --ink: #26372e;
+  --muted: #596256;
+  --rule: #d2d7ca;
+  --green: #324c41;
+  --danger: #9c3827;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 13px;
+  color: var(--ink);
+  background: var(--paper);
+}
+* { box-sizing: border-box; }
+body { width: 380px; max-width: 100vw; margin: 0; }
+main { padding: 16px 24px 12px; }
+button, textarea { font: inherit; }
+button { cursor: pointer; }
+button:disabled { cursor: default; }
+button:focus-visible, summary:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; }
+::selection { background: #d2e3cf; color: var(--ink); }
+.masthead, .identity, .draft-heading, .draft-details, .session-heading, .progress-details, .shortcut-row, footer, .local { display: flex; align-items: center; }
+.masthead, .draft-heading, .draft-details, .session-heading, .progress-details, .shortcut-row, footer { justify-content: space-between; gap: 10px; }
+.masthead { margin-bottom: 15px; }
+.identity { gap: 9px; }
+.brand-mark { width: 28px; height: 28px; stroke: var(--green); fill: none; stroke-width: 2.4; stroke-linecap: square; }
+h1 { font-size: 22px; margin: 0; font-weight: 650; letter-spacing: -0.025em; }
+.pace { font-size: 16px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.pace span { font-size: 10px; letter-spacing: 0.04em; font-weight: 600; color: var(--muted); }
+.draft-heading { margin-bottom: 9px; }
+label { font-weight: 600; }
+#save-status { font-size: 11px; color: var(--muted); }
+textarea { display: block; resize: vertical; min-height: 154px; max-height: 250px; width: 100%; border: 1px solid #aab4a5; background: #fffefa; color: var(--ink); border-radius: 8px; padding: 13px; line-height: 1.65; caret-color: var(--green); scrollbar-color: #aab4a5 #fffefa; scrollbar-width: thin; }
+textarea::placeholder { color: #72776b; }
+textarea:focus { outline: 2px solid var(--green); outline-offset: 2px; }
+textarea:disabled { background: #eeefe7; }
+.draft-details, .progress-details { color: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; margin-top: 9px; }
+.session { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin-top: 16px; padding: 13px 0 12px; }
+h2 { font-size: 13px; margin: 0; font-weight: 650; }
+.stop { border: 1px solid var(--rule); padding: 5px 11px; background: transparent; border-radius: 5px; color: var(--danger); font-weight: 600; font-size: 11px; }
+.stop:not(:disabled):hover { background: #f4e3dc; border-color: var(--danger); }
+.stop:disabled { color: var(--muted); opacity: 0.65; }
+progress { display: block; width: 100%; height: 4px; border: 0; border-radius: 0; margin-top: 12px; appearance: none; }
+progress::-webkit-progress-bar { background: #e0e4d9; }
+progress::-webkit-progress-value { background: var(--green); }
+progress::-moz-progress-bar { background: var(--green); }
+#session-message { font-size: 12px; color: var(--muted); margin: 10px 0 0; line-height: 1.4; }
+body[data-phase="error"] #session-message, .error { color: var(--danger); }
+.error { font-size: 12px; line-height: 1.5; }
+.instructions { padding: 12px 0 10px; }
+.shortcut-row { margin-bottom: 6px; }
+kbd { border: 1px solid var(--rule); background: #eeefe7; border-radius: 4px; padding: 3px 7px; font: 11px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; white-space: nowrap; }
+.text-button { padding: 0; border: 0; background: transparent; color: var(--green); font-size: 11px; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.text-button:hover { text-decoration: underline; }
+.text-button:disabled { color: var(--muted); }
+.text-button svg { width: 12px; height: 12px; margin-left: 3px; vertical-align: middle; fill: none; stroke: currentColor; stroke-width: 1.5; }
+.hint { font-size: 11px; line-height: 1.6; color: var(--muted); margin: 12px 0 0; }
+footer { border-top: 1px solid var(--rule); padding-top: 8px; }
+.local { gap: 5px; color: var(--muted); font-size: 10px; }
+.local svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.2; }
+details { margin-top: 8px; color: var(--muted); font-size: 11px; line-height: 1.55; }
+summary { cursor: pointer; }
+details p { margin: 8px 0; }

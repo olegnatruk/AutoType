@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "AutoType",
+  "version": "0.1.0",
+  "description": "Type a prepared passage at your cursor with a natural rhythm averaging 75 WPM. Local drafts, keyboard control.",
+  "minimum_chrome_version": "118",
+  "permissions": ["debugger", "storage", "activeTab", "scripting"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "action": { "default_popup": "popup.html", "default_title": "AutoType" },
+  "icons": { "16": "icons/icon16.png", "32": "icons/icon32.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
+  "commands": {
+    "toggle-typing": {
+      "suggested_key": { "default": "Ctrl+Shift+Y", "mac": "Command+Shift+Y" },
+      "description": "Start, pause, or resume typing"
+    },
+    "stop-typing": {
+      "suggested_key": { "default": "Ctrl+Shift+X", "mac": "Command+Shift+X" },
+      "description": "Stop typing and reset progress"
+    }
+  }
+}
