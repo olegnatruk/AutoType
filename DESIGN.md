@@ -156,7 +156,7 @@ The palette combines warm paper neutrals, dark green text and controls, and rest
 - **Body** (13px, normal weight and line height): labels, instruction-row descriptions, and the base utility text use the body size.
 - **Passage** (13px, line height 1.65): the body size with a generous line height; text stays readable inside the scrollable field.
 - **Label / section title** (13px, weights 600 / 650): the passage label uses the label weight; the session heading uses the slightly stronger section-title weight.
-- **Pace** (16px, weight 650): the numeric pace is larger than body text; its unit is smaller (10px), semibold (600), muted, and lightly tracked (0.04em).
+- **Pace** (16px, weight 650): the numeric pace is larger than body text; its unit is smaller (10px), semibold (600), muted, and lightly tracked (0.04em). Flanked by compact 20px decrease and increase buttons (4px border-radius, 1px rule border, green text) in the header to adjust speed between 20 and 200 WPM in 5 WPM increments.
 - **Metadata** (11px): save status, draft and progress details, shortcuts, text actions, and guidance use the metadata size. Guidance has a line height of 1.6; disclosure copy uses 1.55.
 - **Status** (12px, line height 1.4): the session message uses the status role. Save/request error copy uses the same size with a line height of 1.5.
 - **Locality note** (10px): the footer’s device-local draft note is smaller (10px).

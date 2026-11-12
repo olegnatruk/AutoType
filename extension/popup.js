@@ -1,10 +1,11 @@
-import { estimateDuration, segmentText } from './core.js';
+import { estimateDuration, segmentText, DEFAULT_WPM, MIN_WPM, MAX_WPM, WPM_STEP } from './core.js';
 
 const $ = id => document.getElementById(id);
 const draft = $('draft');
 let saving = Promise.resolve();
 let revision = 0;
 let localEdits = false;
+let currentWpm = DEFAULT_WPM;
 
 function duration(ms) {
   const seconds = Math.ceil(ms / 1000);
@@ -15,8 +16,21 @@ function duration(ms) {
 function updateDraftDetails() {
   const count = segmentText(draft.value).length;
   $('character-count').textContent = `${count.toLocaleString()} characters`;
-  $('duration').textContent = `About ${duration(estimateDuration(draft.value))}`;
+  $('duration').textContent = `About ${duration(estimateDuration(draft.value, currentWpm))}`;
   $('clear').disabled = !draft.value;
+}
+function updatePaceUi(wpm) {
+  currentWpm = wpm;
+  $('wpm-value').textContent = wpm;
+  $('decrease-wpm').disabled = wpm <= MIN_WPM;
+  $('increase-wpm').disabled = wpm >= MAX_WPM;
+  updateDraftDetails();
+}
+function changeWpm(delta) {
+  const next = Math.min(MAX_WPM, Math.max(MIN_WPM, currentWpm + delta));
+  if (next === currentWpm) return;
+  updatePaceUi(next);
+  request({ type: 'SET_WPM', wpm: next }).catch(showError);
 }
 async function request(message) {
   const response = await chrome.runtime.sendMessage(message);
@@ -37,6 +51,7 @@ function render(state) {
   $('progress-label').textContent = state.total ? `${state.index.toLocaleString()} of ${state.total.toLocaleString()} characters` : 'No active passage';
   $('remaining').textContent = state.total && state.index < state.total ? `${duration(state.remainingMs)} left` : '';
   $('stop').disabled = !['typing', 'starting', 'paused'].includes(state.phase);
+  if (state.wpm && state.wpm !== currentWpm) updatePaceUi(state.wpm);
 }
 
 // Saving is serialized and begins on every input, not on a closing-popup debounce.
@@ -57,6 +72,8 @@ draft.addEventListener('input', () => {
 });
 
 $('stop').addEventListener('click', () => { request({ type: 'STOP' }).catch(showError); });
+$('decrease-wpm').addEventListener('click', () => changeWpm(-WPM_STEP));
+$('increase-wpm').addEventListener('click', () => changeWpm(WPM_STEP));
 $('clear').addEventListener('click', async () => {
   $('clear').disabled = true;
   draft.disabled = true;
@@ -78,14 +95,20 @@ chrome.runtime.onMessage.addListener(message => {
   if (message.type === 'SESSION_STATE') render(message.state);
 });
 chrome.storage.onChanged.addListener((changes, area) => {
-  if (area === 'local' && changes.draft && !localEdits) {
-    draft.value = changes.draft.newValue || '';
-    updateDraftDetails();
+  if (area === 'local') {
+    if (changes.draft && !localEdits) {
+      draft.value = changes.draft.newValue || '';
+      updateDraftDetails();
+    }
+    if (changes.wpm) {
+      updatePaceUi(changes.wpm.newValue || DEFAULT_WPM);
+    }
   }
 });
 
 try {
   const result = await request({ type: 'GET_STATE' });
+  updatePaceUi(result.wpm || result.state?.wpm || DEFAULT_WPM);
   draft.value = result.draft;
   draft.disabled = false;
   $('save-status').textContent = result.draft ? 'Saved' : 'Empty';

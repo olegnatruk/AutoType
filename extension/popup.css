@@ -25,6 +25,11 @@ button:focus-visible, summary:focus-visible { outline: 2px solid var(--green); o
 .identity { gap: 9px; }
 .brand-mark { width: 28px; height: 28px; stroke: var(--green); fill: none; stroke-width: 2.4; stroke-linecap: square; }
 h1 { font-size: 22px; margin: 0; font-weight: 650; letter-spacing: -0.025em; }
+.pace-control { display: inline-flex; align-items: center; gap: 4px; }
+.pace-button { width: 20px; height: 20px; padding: 0; border: 1px solid var(--rule); background: transparent; border-radius: 4px; color: var(--green); font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; line-height: 1; user-select: none; }
+.pace-button:not(:disabled):hover { background: #eeefe7; border-color: #aab4a5; }
+.pace-button:disabled { color: var(--muted); opacity: 0.35; cursor: default; }
+.pace-button:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
 .pace { font-size: 16px; font-weight: 650; font-variant-numeric: tabular-nums; }
 .pace span { font-size: 10px; letter-spacing: 0.04em; font-weight: 600; color: var(--muted); }
 .draft-heading { margin-bottom: 9px; }

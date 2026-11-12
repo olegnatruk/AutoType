@@ -1,4 +1,4 @@
-import { TypingSession, CommandController, validateDraft } from './core.js';
+import { TypingSession, CommandController, validateDraft, clampWpm } from './core.js';
 import { inspectTarget } from './target.js';
 
 const storageReady = chrome.storage.local.setAccessLevel({ accessLevel: 'TRUSTED_CONTEXTS' });
@@ -71,11 +71,17 @@ const publish = state => {
 };
 const session = new TypingSession({
   driver, publish,
-  getDraft: async () => { await storageReady; return (await chrome.storage.local.get('draft')).draft || ''; }
+  getDraft: async () => { await storageReady; return (await chrome.storage.local.get('draft')).draft || ''; },
+  getWpm: async () => { await storageReady; return (await chrome.storage.local.get('wpm')).wpm || 75; }
 });
 const ready = storageReady.then(async () => {
   const { checkpoint } = await chrome.storage.session.get('checkpoint');
-  session.restore(checkpoint);
+  if (!checkpoint) {
+    const { wpm } = await chrome.storage.local.get('wpm');
+    if (wpm) session.wpm = clampWpm(wpm);
+  } else {
+    session.restore(checkpoint);
+  }
   publish(session.snapshot());
 });
 
@@ -94,7 +100,20 @@ chrome.runtime.onMessage.addListener((message, sender, respond) => {
     switch (message?.type) {
       case 'GET_STATE':
         await saveQueue;
-        return { draft: (await chrome.storage.local.get('draft')).draft || '', state: session.snapshot(), commands: await chrome.commands.getAll() };
+        return {
+          draft: (await chrome.storage.local.get('draft')).draft || '',
+          wpm: (await chrome.storage.local.get('wpm')).wpm || session.wpm || 75,
+          state: session.snapshot(),
+          commands: await chrome.commands.getAll()
+        };
+      case 'SET_WPM': {
+        const wpm = clampWpm(message.wpm);
+        session.setWpm(wpm);
+        const write = saveQueue.then(() => chrome.storage.local.set({ wpm }));
+        saveQueue = write.catch(() => {});
+        await write;
+        return { wpm };
+      }
       case 'SAVE_DRAFT': {
         validateDraft(message.text);
         const write = saveQueue.then(() => chrome.storage.local.set({ draft: message.text }));

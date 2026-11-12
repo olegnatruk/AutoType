@@ -1,5 +1,21 @@
-export const WPM = 75;
-export const CHARACTER_MS = 60_000 / (WPM * 5);
+export const DEFAULT_WPM = 75;
+export const MIN_WPM = 20;
+export const MAX_WPM = 200;
+export const WPM_STEP = 5;
+export const WPM = DEFAULT_WPM;
+
+export function clampWpm(wpm) {
+  if (wpm == null || wpm === '') return DEFAULT_WPM;
+  const num = Number(wpm);
+  if (!Number.isFinite(num)) return DEFAULT_WPM;
+  return Math.min(MAX_WPM, Math.max(MIN_WPM, Math.round(num / WPM_STEP) * WPM_STEP));
+}
+
+export function characterMs(wpm = DEFAULT_WPM) {
+  return 60_000 / (clampWpm(wpm) * 5);
+}
+
+export const CHARACTER_MS = characterMs(DEFAULT_WPM);
 export const MAX_DRAFT_LENGTH = 200_000;
 
 export function segmentText(text) {
@@ -8,18 +24,19 @@ export function segmentText(text) {
     .segment(text.replace(/\r\n?/g, '\n'))].map(part => part.segment);
 }
 
-export function createSchedule(characters, random = Math.random) {
+export function createSchedule(characters, random = Math.random, wpm = DEFAULT_WPM) {
   if (!characters.length) return [];
+  const ms = characterMs(wpm);
   const weights = characters.map(character => {
     const punctuation = /[.!?\n]/u.test(character) ? 2.1 : /[,;:]/u.test(character) ? 1.5 : 1;
     return (0.75 + random() * 0.5) * punctuation;
   });
-  const factor = characters.length * CHARACTER_MS / weights.reduce((sum, weight) => sum + weight, 0);
+  const factor = characters.length * ms / weights.reduce((sum, weight) => sum + weight, 0);
   return weights.map(weight => weight * factor);
 }
 
-export function estimateDuration(text) {
-  return segmentText(text).length * CHARACTER_MS;
+export function estimateDuration(text, wpm = DEFAULT_WPM) {
+  return segmentText(text).length * characterMs(wpm);
 }
 
 export function validateDraft(text) {
@@ -74,12 +91,24 @@ export class CommandController {
 // Each action, including individual input dispatches, passes through one queue.
 // Timers live outside it, so Stop never waits for an entire passage.
 export class TypingSession {
-  constructor({ driver, getDraft, publish = () => {}, sleep = wait, now = () => performance.now(), random = Math.random }) {
-    Object.assign(this, { driver, getDraft, publish, sleep, now, random });
+  constructor({ driver, getDraft, getWpm = () => DEFAULT_WPM, publish = () => {}, sleep = wait, now = () => performance.now(), random = Math.random }) {
+    Object.assign(this, { driver, getDraft, getWpm, publish, sleep, now, random });
     this.queue = Promise.resolve();
     this.state = { phase: 'idle', index: 0, total: 0, message: 'Ready when you are.' };
     this.version = 0;
     this.attached = false;
+    this.wpm = DEFAULT_WPM;
+  }
+
+  setWpm(wpm) {
+    const nextWpm = clampWpm(wpm);
+    const oldWpm = this.wpm || DEFAULT_WPM;
+    this.wpm = nextWpm;
+    if (this.schedule?.length && oldWpm !== nextWpm) {
+      const ratio = oldWpm / nextWpm;
+      this.schedule = this.schedule.map(delay => delay * ratio);
+    }
+    this.publish(this.snapshot());
   }
 
   enqueue(action) {
@@ -90,13 +119,14 @@ export class TypingSession {
 
   snapshot() {
     const { phase, index, total, message, tabId } = this.state;
-    return { phase, index, total, message, tabId, remainingMs: Math.max(0, total - index) * CHARACTER_MS };
+    const wpm = this.wpm || DEFAULT_WPM;
+    return { phase, index, total, message, tabId, wpm, remainingMs: Math.max(0, total - index) * characterMs(wpm) };
   }
 
   checkpoint() {
     if (!['typing', 'paused', 'starting'].includes(this.state.phase)) return null;
     return { state: { ...this.state }, characters: this.characters, schedule: this.schedule,
-      token: this.token, target: this.target };
+      token: this.token, target: this.target, wpm: this.wpm || DEFAULT_WPM };
   }
 
   restore(checkpoint) {
@@ -105,9 +135,10 @@ export class TypingSession {
       this.state = { phase: 'error', index: 0, total: 0, message: 'A previous run was interrupted. Check the editor before starting a new run.' };
       return;
     }
-    const { state, characters, schedule, token, target } = checkpoint;
+    const { state, characters, schedule, token, target, wpm } = checkpoint;
     if (!Array.isArray(characters) || !Array.isArray(schedule) || characters.length !== schedule.length
       || !target?.kind || !token || !Number.isInteger(state.index) || state.index < 0 || state.index >= characters.length) return;
+    this.wpm = clampWpm(wpm || DEFAULT_WPM);
     Object.assign(this, { state, characters, schedule, token, target });
   }
 
@@ -129,8 +160,9 @@ export class TypingSession {
         const text = validateDraft(await this.getDraft());
         if (!text.length) throw new Error('Paste a passage into AutoType first.');
         if (!tab?.id || !/^https?:\/\//u.test(tab.url || '')) throw new Error('Open a website and click an editable field first. Browser pages and local files are unsupported.');
+        this.wpm = clampWpm(await this.getWpm?.() ?? DEFAULT_WPM);
         this.characters = segmentText(text);
-        this.schedule = createSchedule(this.characters, this.random);
+        this.schedule = createSchedule(this.characters, this.random, this.wpm);
         this.token = crypto.randomUUID();
         this.update({ phase: 'starting', index: 0, total: this.characters.length, tabId: tab.id, message: 'Checking your cursor…' });
         this.target = await this.driver.capture(tab.id, this.token, this.characters.includes('\n'));
@@ -151,7 +183,8 @@ export class TypingSession {
       await this.driver.arm(this.state.tabId, this.token);
       this.abort = new AbortController();
       const version = ++this.version;
-      this.update({ phase: 'typing', message: 'Typing at a natural 75 WPM.' });
+      const wpm = this.wpm || DEFAULT_WPM;
+      this.update({ phase: 'typing', message: `Typing at a natural ${wpm} WPM.` });
       void this.run(version).catch(error => this.enqueue(() => this.finish('error', error.message)));
     } catch (error) {
       if (resuming) await this.pauseInternal(`${error.message} Click the original editor and try the shortcut again.`);

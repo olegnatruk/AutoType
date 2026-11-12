@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { segmentText, createSchedule, estimateDuration, validateDraft, TypingSession, CommandController, wait } from '../extension/core.js';
+import { segmentText, createSchedule, estimateDuration, validateDraft, TypingSession, CommandController, wait, clampWpm, characterMs, DEFAULT_WPM, MIN_WPM, MAX_WPM } from '../extension/core.js';
 
 test('Unicode graphemes and whitespace survive segmentation', () => {
   const text = 'Hi 👩🏽‍💻, cafe\u0301!\t\n\nDone.';
@@ -230,4 +230,56 @@ test('focus/navigation cancellation also cancels an already fired startup waitin
   release();
   await fired;
   assert.equal(f.calls.length, 0);
+});
+
+test('clampWpm bounds and rounds to increments of 5', () => {
+  assert.equal(clampWpm(75), 75);
+  assert.equal(clampWpm(72), 70);
+  assert.equal(clampWpm(74), 75);
+  assert.equal(clampWpm(10), MIN_WPM);
+  assert.equal(clampWpm(250), MAX_WPM);
+  assert.equal(clampWpm('invalid'), DEFAULT_WPM);
+  assert.equal(clampWpm(null), DEFAULT_WPM);
+  assert.equal(clampWpm(NaN), DEFAULT_WPM);
+});
+
+test('custom WPM adjusts pacing and duration calculation', () => {
+  assert.equal(characterMs(150), 80);
+  assert.equal(characterMs(50), 240);
+  assert.equal(estimateDuration('abcde', 150), 400);
+  const text = segmentText('Speed test passage.');
+  const schedule150 = createSchedule(text, () => 0.5, 150);
+  const schedule75 = createSchedule(text, () => 0.5, 75);
+  assert.ok(Math.abs(schedule150.reduce((s, d) => s + d, 0) - text.length * 80) < 0.001);
+  assert.ok(Math.abs(schedule75.reduce((s, d) => s + d, 0) - text.length * 160) < 0.001);
+});
+
+test('TypingSession initializes with custom getWpm and scales schedule on setWpm', async () => {
+  const f = fixture('hello');
+  f.session.getWpm = async () => 100;
+  await f.session.toggle(tab);
+  assert.equal(f.session.wpm, 100);
+  assert.equal(f.session.snapshot().wpm, 100);
+  const initialSchedule = [...f.session.schedule];
+  f.session.setWpm(200);
+  assert.equal(f.session.wpm, 200);
+  assert.equal(f.session.snapshot().wpm, 200);
+  for (let i = 0; i < initialSchedule.length; i++) {
+    assert.ok(Math.abs(f.session.schedule[i] - initialSchedule[i] * 0.5) < 0.001);
+  }
+  await f.session.stop();
+});
+
+test('checkpoint and restore preserve custom WPM', async () => {
+  const f = fixture('hello');
+  f.session.getWpm = async () => 120;
+  await f.session.toggle(tab);
+  await f.tick();
+  await f.session.pause();
+  const cp = f.session.checkpoint();
+  assert.equal(cp.wpm, 120);
+  const g = fixture('hello');
+  g.session.restore(cp);
+  assert.equal(g.session.wpm, 120);
+  assert.equal(g.session.snapshot().wpm, 120);
 });
